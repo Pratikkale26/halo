@@ -1,0 +1,13 @@
+{
+  "allowedPrograms": [
+    "11111111111111111111111111111111",
+    "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+    "KaminoLending111111111111111111111111111111",
+    "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+  ],
+  "blockOn": ["criticalDrainerPattern"],
+  "description": "Halo-attested confirmation for Kamino deposits >= $1k",
+  "maxValueUsd": 100000,
+  "minStepUpUsd": 1000,
+  "name": "kamino-deposit-v1"
+}
