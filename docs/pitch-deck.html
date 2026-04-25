@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halo · Pitch Deck · Solana Mobile Builder Grant</title>
+  <style>
+    :root {
+      --c-bg: #0A0E1A;
+      --c-bg-alt: #131929;
+      --c-bg-card: #1A2138;
+      --c-surface: #232C46;
+      --c-border: rgba(255,255,255,0.08);
+      --c-border-strong: rgba(255,255,255,0.16);
+
+      --c-primary: #5B7FFF;
+      --c-primary-dim: rgba(91,127,255,0.10);
+      --c-accent: #3CD89A;
+      --c-accent-dim: rgba(60,216,154,0.10);
+      --c-danger: #FF5C7A;
+      --c-danger-dim: rgba(255,92,122,0.10);
+      --c-warning: #FFB347;
+
+      --c-text: #F2F4FA;
+      --c-text-secondary: rgba(242,244,250,0.70);
+      --c-text-muted: rgba(242,244,250,0.40);
+
+      --f-hero: 88px;
+      --f-h1: 56px;
+      --f-h2: 40px;
+      --f-h3: 28px;
+      --f-body: 22px;
+      --f-small: 18px;
+      --f-caption: 14px;
+
+      --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+      --s-xs: 8px;
+      --s-sm: 16px;
+      --s-md: 24px;
+      --s-lg: 40px;
+      --s-xl: 64px;
+      --s-2xl: 96px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; background: var(--c-bg); color: var(--c-text); font-family: var(--font-display); }
+
+    .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 64px 96px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease-out;
+      background: var(--c-bg);
+    }
+    .slide.bg-alt { background: var(--c-bg-alt); }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide.active .ai { animation: fadeUp 0.5s ease-out both; }
+    .slide.active .ai:nth-child(1) { animation-delay: 0s; }
+    .slide.active .ai:nth-child(2) { animation-delay: 0.07s; }
+    .slide.active .ai:nth-child(3) { animation-delay: 0.14s; }
+    .slide.active .ai:nth-child(4) { animation-delay: 0.21s; }
+    .slide.active .ai:nth-child(5) { animation-delay: 0.28s; }
+    .slide.active .ai:nth-child(6) { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { font-size: var(--f-hero); font-weight: 800; letter-spacing: -2.5px; line-height: 1.02; }
+    .h1 { font-size: var(--f-h1); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; }
+    .h2 { font-size: var(--f-h2); font-weight: 700; letter-spacing: -1px; line-height: 1.15; }
+    .h3 { font-size: var(--f-h3); font-weight: 600; line-height: 1.3; }
+    .body { font-size: var(--f-body); font-weight: 400; line-height: 1.55; color: var(--c-text-secondary); }
+    .small { font-size: var(--f-small); font-weight: 400; line-height: 1.55; color: var(--c-text-secondary); }
+    .caption { font-size: var(--f-caption); font-weight: 600; color: var(--c-text-muted); letter-spacing: 2.5px; text-transform: uppercase; }
+    .mono { font-family: var(--font-mono); }
+
+    .text-primary { color: var(--c-primary); }
+    .text-accent { color: var(--c-accent); }
+    .text-danger { color: var(--c-danger); }
+    .text-muted { color: var(--c-text-muted); }
+    .text-em { color: var(--c-primary); font-weight: 700; }
+
+    .divider { height: 1px; background: var(--c-border); margin: 24px 0; }
+    .divider-strong { height: 2px; width: 64px; background: var(--c-primary); margin: 24px 0; }
+
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: 0.3px; }
+    .badge-primary { background: var(--c-primary-dim); color: var(--c-primary); border: 1px solid rgba(91,127,255,0.25); }
+    .badge-accent { background: var(--c-accent-dim); color: var(--c-accent); border: 1px solid rgba(60,216,154,0.25); }
+    .badge-danger { background: var(--c-danger-dim); color: var(--c-danger); border: 1px solid rgba(255,92,122,0.25); }
+
+    .card {
+      background: var(--c-bg-card);
+      border: 1px solid var(--c-border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .card-glow { box-shadow: 0 0 30px rgba(91,127,255,0.08); border-color: rgba(91,127,255,0.18); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-1 { flex: 1; }
+    .gap-sm { gap: 16px; } .gap-md { gap: 24px; } .gap-lg { gap: 40px; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+
+    .metric { text-align: center; }
+    .metric-value { font-size: 64px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; color: var(--c-text); }
+    .metric-value.danger { color: var(--c-danger); }
+    .metric-value.accent { color: var(--c-accent); }
+    .metric-label { color: var(--c-text-muted); font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 8px; }
+
+    table.cmp { width: 100%; border-collapse: collapse; font-size: 17px; }
+    table.cmp th, table.cmp td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--c-border); }
+    table.cmp th { color: var(--c-text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+    table.cmp tr:last-child td { border-bottom: none; }
+    table.cmp .row-em { background: var(--c-primary-dim); border-radius: 8px; }
+    table.cmp .row-em td { color: var(--c-text); font-weight: 500; }
+
+    .step-row { display: flex; align-items: flex-start; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--c-border); }
+    .step-row:last-child { border-bottom: none; }
+    .step-num { font-family: var(--font-mono); font-size: 14px; color: var(--c-primary); border: 1px solid var(--c-primary); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; }
+    .step-body { flex: 1; }
+
+    .code-block {
+      background: #050810;
+      border: 1px solid var(--c-border);
+      border-radius: 10px;
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--c-text);
+      line-height: 1.7;
+      overflow: hidden;
+    }
+    .code-block .kw { color: var(--c-primary); }
+    .code-block .str { color: var(--c-accent); }
+    .code-block .com { color: var(--c-text-muted); }
+
+    .roadmap { display: flex; gap: 0; margin-top: 32px; }
+    .road-step { flex: 1; padding: 20px; border-left: 2px solid var(--c-border); position: relative; }
+    .road-step:first-child { border-left: 2px solid var(--c-primary); }
+    .road-step .road-tag { font-family: var(--font-mono); font-size: 12px; color: var(--c-primary); margin-bottom: 8px; letter-spacing: 1.5px; }
+    .road-step .road-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+    .road-step .road-detail { font-size: 13px; color: var(--c-text-muted); line-height: 1.5; }
+
+    .nav {
+      position: fixed; bottom: 24px; right: 24px; display: flex; gap: 8px; z-index: 100;
+      background: rgba(10,14,26,0.85); backdrop-filter: blur(8px); padding: 10px 14px; border-radius: 999px; border: 1px solid var(--c-border);
+    }
+    .nav button {
+      background: transparent; border: 1px solid var(--c-border-strong);
+      color: var(--c-text); width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      font-family: var(--font-display); font-size: 14px;
+    }
+    .nav button:hover { border-color: var(--c-primary); color: var(--c-primary); }
+    .nav .counter { display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--c-text-muted); font-family: var(--font-mono); }
+
+    .corner-brand {
+      position: absolute; top: 24px; right: 32px; font-size: 13px; color: var(--c-text-muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+    }
+    .corner-page {
+      position: absolute; bottom: 24px; left: 32px; font-family: var(--font-mono); font-size: 12px; color: var(--c-text-muted);
+    }
+
+    /* Hide scrollbar everywhere */
+    ::-webkit-scrollbar { display: none; }
+
+    /* Print: one slide per page */
+    @media print {
+      .nav { display: none; }
+      .slide { page-break-after: always; opacity: 1 !important; pointer-events: auto !important; position: relative !important; height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+
+    <!-- 1. TITLE -->
+    <div class="slide bg-alt active" id="s1" style="justify-content: center; align-items: center; text-align: center;">
+      <span class="badge badge-primary ai" style="margin-bottom: 32px;">SOLANA MOBILE BUILDER GRANT · $15K</span>
+      <h1 class="hero ai">Halo</h1>
+      <p class="h3 ai" style="color: var(--c-text-secondary); margin-top: 18px; max-width: 760px;">
+        Hardware-attested transaction defense for Solana — built on the Seeker's Seed Vault.
+      </p>
+      <div class="ai" style="margin-top: 56px; display: flex; gap: 20px; align-items: center; color: var(--c-text-muted); font-size: 14px; letter-spacing: 1px;">
+        <span>PRATIK KALE</span>
+        <span style="opacity: 0.4;">·</span>
+        <span>github.com/Pratikkale26/halo</span>
+        <span style="opacity: 0.4;">·</span>
+        <span>APRIL 2026</span>
+      </div>
+    </div>
+
+    <!-- 2. PROBLEM -->
+    <div class="slide" id="s2">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">02 / 14</span>
+      <span class="caption ai">THE PROBLEM</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1000px;">
+        Solana users lost over <span class="text-danger">$90M to wallet drainers in H1 2025 alone.</span>
+      </h1>
+      <div class="divider-strong ai"></div>
+      <div class="grid-3 ai" style="margin-top: 32px;">
+        <div class="card">
+          <p class="caption" style="color: var(--c-danger);">SCALE</p>
+          <p class="h3" style="margin-top: 10px;">$90M+ stolen</p>
+          <p class="small" style="margin-top: 6px;">From Solana wallets in just the first half of 2025. Bigger than most ecosystem revenues.</p>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-danger);">EVOLUTION</p>
+          <p class="h3" style="margin-top: 10px;">Bypassing simulations</p>
+          <p class="small" style="margin-top: 6px;">2026 drainer kits weaponise TOCTOU attacks — the wallet shows one tx, the chain executes another.</p>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-danger);">SURFACE</p>
+          <p class="h3" style="margin-top: 10px;">Mobile is unprotected</p>
+          <p class="small" style="margin-top: 6px;">Existing defenses are browser extensions or cloud scanners. Mobile users are flying blind.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. THE DRIFT HACK -->
+    <div class="slide bg-alt" id="s3">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">03 / 14</span>
+      <span class="caption ai" style="color: var(--c-danger);">RECENT INCIDENT · 3 WEEKS AGO</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1000px;">
+        Drift Protocol: <span class="text-danger">$285M lost on April 1, 2026.</span>
+      </h1>
+      <p class="body ai" style="margin-top: 16px; max-width: 900px;">
+        Compromised admin keys (DPRK-linked). Protocol permanently frozen. TVL collapsed from $550M to under $10M overnight.
+      </p>
+      <div class="divider ai"></div>
+      <div class="grid-2 ai" style="margin-top: 24px; max-width: 1100px;">
+        <div class="card card-glow">
+          <p class="caption" style="color: var(--c-primary);">WHAT WOULD HAVE STOPPED IT</p>
+          <p class="h3" style="margin-top: 12px;">Hardware-attested admin signatures</p>
+          <p class="small" style="margin-top: 12px;">A multisig where every admin signature requires biometric confirmation inside a tamper-resistant secure execution environment makes off-chain key compromise insufficient.</p>
+        </div>
+        <div class="card">
+          <p class="caption">THE BROADER PATTERN</p>
+          <p class="h3" style="margin-top: 12px;">Same root cause as drainers</p>
+          <p class="small" style="margin-top: 12px;">Whether it's an admin key or a user's wallet — Solana's signature verification trusts the input bytes. We have no on-chain way to verify a human reviewed them.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. WHY NOW -->
+    <div class="slide" id="s4">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">04 / 14</span>
+      <span class="caption ai">WHY NOW</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1000px;">
+        Three converging shifts opened a window in Q1 2026.
+      </h1>
+      <div class="divider-strong ai"></div>
+      <div class="grid-3 ai" style="margin-top: 32px;">
+        <div class="card">
+          <p class="caption" style="color: var(--c-primary);">MARKET SHIFT</p>
+          <p class="h3" style="margin-top: 12px;">Drainer kits evolved past server-side simulation.</p>
+          <p class="small" style="margin-top: 10px;">Blockaid-class defenses were enough in 2024. They aren't anymore.</p>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-primary);">TECH UNLOCK</p>
+          <p class="h3" style="margin-top: 12px;">Solana Attestation Service launched on mainnet.</p>
+          <p class="small" style="margin-top: 10px;">The composable on-chain credential rail Halo needs to make hardware attestations verifiable from any program.</p>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-primary);">PLATFORM</p>
+          <p class="h3" style="margin-top: 12px;">Solana Seeker is shipping with 175+ dApps live.</p>
+          <p class="small" style="margin-top: 10px;">The first mobile platform globally where signing key, biometric, and secure display share a single hardware boundary.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. SOLUTION -->
+    <div class="slide bg-alt" id="s5">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">05 / 14</span>
+      <span class="caption ai">THE SOLUTION</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1000px;">
+        A drop-in SDK + on-chain verifier any Solana dApp wires up in <span class="text-em">five lines.</span>
+      </h1>
+      <div class="divider ai"></div>
+      <div class="grid-2 ai gap-md" style="margin-top: 24px;">
+        <div class="card">
+          <p class="caption" style="color: var(--c-primary);">CLIENT — REACT NATIVE</p>
+          <pre class="code-block" style="margin-top: 14px;">
+<span class="kw">const</span> halo = <span class="kw">new</span> HaloClient({ connection, policyHash });
+
+<span class="kw">const</span> result = <span class="kw">await</span> halo.signWithAttestation({
+  transaction, account,
+  context: { description: <span class="str">"Deposit 5,000 USDC"</span> }
+});
+
+<span class="com">// result.status: "approved" | "blocked" | "rejected"</span>
+          </pre>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-accent);">PROGRAM — ANCHOR CPI</p>
+          <pre class="code-block" style="margin-top: 14px;">
+halo::cpi::verify_attestation(
+  ctx.accounts.into_halo_ctx(),
+  VerifyAttestationParams {
+    expected_user: ctx.accounts.user.key(),
+    expected_policy_hash: KAMINO_DEPOSIT_POLICY,
+    max_age_secs: 60,
+  },
+)?;
+          </pre>
+        </div>
+      </div>
+      <p class="small ai" style="margin-top: 24px; max-width: 900px;">
+        On-device transaction simulation + drainer-pattern detection runs <em>inside the Seeker's secure execution environment</em>. The user only sees a Seed Vault prompt for transactions that survive the local audit. Approval emits a <span class="text-em">SAS attestation</span> any Solana program can verify on-chain.
+      </p>
+    </div>
+
+    <!-- 6. ARCHITECTURE -->
+    <div class="slide" id="s6">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">06 / 14</span>
+      <span class="caption ai">HOW IT WORKS</span>
+      <h1 class="h2 ai" style="margin-top: 16px;">Three layers, one trust loop.</h1>
+      <div class="divider-strong ai"></div>
+      <div class="grid-3 ai" style="margin-top: 32px;">
+        <div class="card">
+          <p class="caption" style="color: var(--c-accent);">L3 · ON-CHAIN</p>
+          <p class="h3" style="margin-top: 10px;">Halo verifier program</p>
+          <p class="small" style="margin-top: 10px;">Anchor program with <code class="mono" style="color:var(--c-primary)">verify_attestation</code>, PolicyRegistry PDAs, IssuerAuthority. Any Solana program CPIs in.</p>
+          <p class="caption" style="margin-top: 16px; color: var(--c-text-muted);">10 / 10 INTEGRATION TESTS PASSING</p>
+        </div>
+        <div class="card card-glow">
+          <p class="caption" style="color: var(--c-primary);">L2 · DEVICE</p>
+          <p class="h3" style="margin-top: 10px;">SDK + drainer detector</p>
+          <p class="small" style="margin-top: 10px;">5 attack-pattern rules running inside the secure execution environment. SAS issuer. Mobile Wallet Adapter bridge to Seed Vault.</p>
+          <p class="caption" style="margin-top: 16px; color: var(--c-text-muted);">13 / 13 UNIT TESTS PASSING</p>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-accent);">L1 · DAPP</p>
+          <p class="h3" style="margin-top: 10px;">Any Solana app</p>
+          <p class="small" style="margin-top: 10px;">Wallets, DEXs, NFT marketplaces, lending protocols. 5-line client integration, 5-line program-side verify.</p>
+          <p class="caption" style="margin-top: 16px; color: var(--c-text-muted);">REFERENCE EXPO DEMO IN REPO</p>
+        </div>
+      </div>
+      <p class="small ai" style="margin-top: 28px; color: var(--c-text-muted); max-width: 1000px;">
+        Trust property: the rendering the user reads in Seed Vault is the same rendering applied to the bytes that get signed. A malicious app cannot show one transaction and sign another — the secure display is driven by the Seed Vault, not by the host app.
+      </p>
+    </div>
+
+    <!-- 7. WHY SEEKER -->
+    <div class="slide bg-alt" id="s7">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">07 / 14</span>
+      <span class="caption ai">WHY THE SEEKER</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1100px;">
+        The only mobile platform globally where signing key, biometric, and secure display share <span class="text-em">one trust boundary.</span>
+      </h1>
+      <div class="divider ai"></div>
+      <table class="cmp ai" style="margin-top: 28px;">
+        <thead>
+          <tr>
+            <th></th>
+            <th>SIGNING KEY</th>
+            <th>BIOMETRIC</th>
+            <th>SECURE DISPLAY</th>
+            <th>ON-CHAIN ATTESTATION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>iPhone Secure Enclave</td>
+            <td>✓ enclave</td>
+            <td>✓ Face ID</td>
+            <td>partial</td>
+            <td><span class="text-danger">no native Solana</span></td>
+          </tr>
+          <tr>
+            <td>Generic Android Keystore</td>
+            <td>✓ TEE</td>
+            <td>✓ fingerprint</td>
+            <td><span class="text-danger">no</span></td>
+            <td><span class="text-danger">no</span></td>
+          </tr>
+          <tr>
+            <td>Hardware wallets (Ledger / Trezor)</td>
+            <td>✓ secure chip</td>
+            <td><span class="text-danger">no biometric</span></td>
+            <td>✓ on-device screen</td>
+            <td><span class="text-danger">cold-storage flow only</span></td>
+          </tr>
+          <tr class="row-em">
+            <td><strong>Solana Seeker · Seed Vault</strong></td>
+            <td><strong>✓ Seed Vault</strong></td>
+            <td><strong>✓ in same TEE</strong></td>
+            <td><strong>✓ tamper-resistant</strong></td>
+            <td><strong>✓ via SAS</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small ai" style="margin-top: 24px; color: var(--c-text-muted);">
+        Halo is intentionally Seeker-native. Saga had Seed Vault but no SAS rail. Generic phones have either / or — not both. The Seeker is what makes this entire product physically possible.
+      </p>
+    </div>
+
+    <!-- 8. DEMO -->
+    <div class="slide" id="s8" style="text-align: center; align-items: center;">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">08 / 14</span>
+      <span class="caption ai">SEE IT IN 90 SECONDS</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1000px;">Live demo</h1>
+      <p class="body ai" style="margin-top: 16px; max-width: 720px;">
+        A drainer dApp tries to convince Pratik's wallet to "claim a free airdrop." Halo decodes what the bytes actually do — and blocks before Seed Vault is ever asked to sign.
+      </p>
+      <div class="ai" style="margin-top: 40px;">
+        <a href="{{DEMO_VIDEO_URL}}" style="display: inline-flex; align-items: center; gap: 12px; padding: 18px 32px; background: var(--c-primary); color: white; border-radius: 12px; font-weight: 600; font-size: 18px; text-decoration: none;">
+          ▶ Watch the demo (90s)
+        </a>
+      </div>
+      <div class="grid-3 ai" style="margin-top: 56px; max-width: 900px; width: 100%;">
+        <div class="metric">
+          <p class="metric-value danger">$285M</p>
+          <p class="metric-label">DRIFT HACK · APR 2026</p>
+        </div>
+        <div class="metric">
+          <p class="metric-value danger">$90M+</p>
+          <p class="metric-label">DRAINERS · H1 2025</p>
+        </div>
+        <div class="metric">
+          <p class="metric-value accent">0</p>
+          <p class="metric-label">SEEKER-NATIVE COMPETITORS</p>
+        </div>
+      </div>
+      <p class="small ai" style="margin-top: 32px; color: var(--c-text-muted);">
+        Replace <code class="mono" style="color:var(--c-primary)">{{DEMO_VIDEO_URL}}</code> with the recorded Loom / YouTube link before submitting.
+      </p>
+    </div>
+
+    <!-- 9. COMPETITIVE LANDSCAPE -->
+    <div class="slide bg-alt" id="s9">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">09 / 14</span>
+      <span class="caption ai">COMPETITIVE LANDSCAPE</span>
+      <h1 class="h2 ai" style="margin-top: 16px; max-width: 1100px;">
+        Verified against <span class="text-em">5,400+ Colosseum hackathon projects.</span> Zero overlap on the Seeker-native, on-device, hardware-attested SDK wedge.
+      </h1>
+      <div class="divider ai"></div>
+      <table class="cmp ai" style="margin-top: 24px;">
+        <thead>
+          <tr>
+            <th>CATEGORY</th>
+            <th>EXAMPLES</th>
+            <th>FORM FACTOR</th>
+            <th>WHY THEY DON'T DEFEND THE SEEKER USER</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Server-side simulation</td>
+            <td>Blockaid (powers Phantom)</td>
+            <td>Cloud API</td>
+            <td>MITM-able · TOCTOU drainers bypass it</td>
+          </tr>
+          <tr>
+            <td>Browser extensions</td>
+            <td>GuardSOL, BlockLock, SolGuard, SAFEGUARD</td>
+            <td>Desktop only</td>
+            <td>Don't reach mobile users at all</td>
+          </tr>
+          <tr>
+            <td>AI scanners</td>
+            <td>Rug Raider, Iteration 0001, Agent Cypher</td>
+            <td>Server-side ML</td>
+            <td>Pattern-matching defeated by novel kits</td>
+          </tr>
+          <tr>
+            <td>Hardware wallets</td>
+            <td>Ledger, SPL Cards, Unruggable ($30k)</td>
+            <td>Standalone wallet</td>
+            <td>Cold-storage flow · not the daily driver</td>
+          </tr>
+          <tr class="row-em">
+            <td><strong>Halo</strong></td>
+            <td><strong>This grant</strong></td>
+            <td><strong>SDK + on-chain verifier</strong></td>
+            <td><strong>On-device · hardware-attested · composable</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small ai" style="margin-top: 20px; color: var(--c-text-muted);">
+        Sources: Colosseum Copilot search across 6 query angles · GitHub <code class="mono" style="color:var(--c-primary)">solana-mobile/seed-vault-sdk</code> issue #36 (open) · SAS issuer index (5 KYC-only issuers, none transaction-level).
+      </p>
+    </div>
+
+    <!-- 10. WHAT WE'VE BUILT -->
+    <div class="slide" id="s10">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">10 / 14</span>
+      <span class="caption ai">WHAT WE'VE ALREADY BUILT</span>
+      <h1 class="h1 ai" style="margin-top: 16px;">Pre-grant: the codebase ships today.</h1>
+      <div class="divider-strong ai"></div>
+      <div class="grid-4 ai" style="margin-top: 32px;">
+        <div class="metric">
+          <p class="metric-value accent">14</p>
+          <p class="metric-label">ATOMIC COMMITS</p>
+        </div>
+        <div class="metric">
+          <p class="metric-value accent">23/23</p>
+          <p class="metric-label">TESTS PASSING</p>
+        </div>
+        <div class="metric">
+          <p class="metric-value accent">3,461</p>
+          <p class="metric-label">LINES OF SOURCE</p>
+        </div>
+        <div class="metric">
+          <p class="metric-value accent">5</p>
+          <p class="metric-label">DRAINER RULES SHIPPED</p>
+        </div>
+      </div>
+      <div class="grid-2 ai gap-md" style="margin-top: 40px;">
+        <div class="card">
+          <p class="caption" style="color: var(--c-primary);">DELIVERED</p>
+          <ul style="margin-top: 12px; list-style: none;">
+            <li style="padding: 6px 0; color: var(--c-text);">✓ Anchor program · 6 instructions · 3 PDA account types</li>
+            <li style="padding: 6px 0; color: var(--c-text);">✓ <code class="mono">@halo/detector</code> · 5 drainer rules + Analyzer</li>
+            <li style="padding: 6px 0; color: var(--c-text);">✓ <code class="mono">@halo/sdk</code> · MWA + mock backends</li>
+            <li style="padding: 6px 0; color: var(--c-text);">✓ Expo / React Native demo · 2 scenarios</li>
+            <li style="padding: 6px 0; color: var(--c-text);">✓ Apache-2.0 · public repo · 4 doc files</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="caption" style="color: var(--c-text-muted);">NEXT (POST-GRANT)</p>
+          <ul style="margin-top: 12px; list-style: none;">
+            <li style="padding: 6px 0; color: var(--c-text-secondary);">→ Independent program audit</li>
+            <li style="padding: 6px 0; color: var(--c-text-secondary);">→ Production MWA wiring on real Seeker</li>
+            <li style="padding: 6px 0; color: var(--c-text-secondary);">→ First wallet pilot integration</li>
+            <li style="padding: 6px 0; color: var(--c-text-secondary);">→ Drainer rule library v2 (full coverage)</li>
+            <li style="padding: 6px 0; color: var(--c-text-secondary);">→ AdminGuard module · Drift-class defense</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. ROADMAP -->
+    <div class="slide bg-alt" id="s11">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">11 / 14</span>
+      <span class="caption ai">ROADMAP</span>
+      <h1 class="h2 ai" style="margin-top: 16px;">From shipped MVP to ecosystem standard.</h1>
+      <div class="divider-strong ai"></div>
+      <div class="roadmap ai">
+        <div class="road-step">
+          <div class="road-tag">M1 · WEEKS 1-4</div>
+          <div class="road-title">Audit + production wiring</div>
+          <div class="road-detail">Halborn / OtterSec audit. Real MWA backend. Mainnet deploy.</div>
+        </div>
+        <div class="road-step">
+          <div class="road-tag">M2 · WEEKS 5-8</div>
+          <div class="road-title">First wallet pilot</div>
+          <div class="road-detail">Phantom, Backpack, or Solflare integration. Real-user data.</div>
+        </div>
+        <div class="road-step">
+          <div class="road-tag">M3 · MONTH 3</div>
+          <div class="road-title">SignerPass</div>
+          <div class="road-detail">Web → Seeker 2FA bridge. Universal MFA for web Solana.</div>
+        </div>
+        <div class="road-step">
+          <div class="road-tag">M4 · MONTH 4</div>
+          <div class="road-title">AdminGuard</div>
+          <div class="road-detail">Squads-style multisig with hardware-attested signers. Drift-hack-class defense.</div>
+        </div>
+        <div class="road-step">
+          <div class="road-tag">M5 · MONTH 5+</div>
+          <div class="road-title">Insurance pool</div>
+          <div class="road-detail">Premiums priced by Halo adoption. Self-sustaining model.</div>
+        </div>
+      </div>
+      <p class="small ai" style="margin-top: 32px; max-width: 950px;">
+        Each milestone is in <code class="mono" style="color:var(--c-primary)">HALO.md §12</code> with acceptance criteria. Deliverables grow the surface area of the Halo brand without expanding maintenance burden — every module reuses the same on-chain verifier program.
+      </p>
+    </div>
+
+    <!-- 12. TEAM -->
+    <div class="slide" id="s12">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">12 / 14</span>
+      <span class="caption ai">TEAM</span>
+      <h1 class="h1 ai" style="margin-top: 16px;">Pratik Kale · solo founder.</h1>
+      <div class="divider-strong ai"></div>
+      <div class="grid-2 ai gap-md" style="margin-top: 32px;">
+        <div>
+          <p class="h3" style="color: var(--c-text);">Background</p>
+          <ul style="margin-top: 16px; list-style: none;">
+            <li style="padding: 8px 0; color: var(--c-text-secondary);">→ <strong style="color:var(--c-text)">3 years</strong> full-stack blockchain development</li>
+            <li style="padding: 8px 0; color: var(--c-text-secondary);">→ <strong style="color:var(--c-text)">Turbin3</strong> graduate (Solana developer cohort)</li>
+            <li style="padding: 8px 0; color: var(--c-text-secondary);">→ <strong style="color:var(--c-text)">CTO</strong> at IIT Madras-affiliated startup</li>
+            <li style="padding: 8px 0; color: var(--c-text-secondary);">→ <strong style="color:var(--c-text)">3× grant recipient</strong> · 1× hackathon winner</li>
+            <li style="padding: 8px 0; color: var(--c-text-secondary);">→ Ships React Native / Expo apps · writes Anchor in Rust daily</li>
+          </ul>
+        </div>
+        <div class="card card-glow">
+          <p class="caption" style="color: var(--c-primary);">FOUNDER-PROBLEM FIT</p>
+          <p class="body" style="margin-top: 12px; color: var(--c-text);">
+            DePIN / infrastructure / tooling is Pratik's strongest lane. Halo is exactly that shape: low-level Solana program work, mobile SDK engineering, and the mechanism design to make hardware attestations composable on-chain.
+          </p>
+          <p class="small" style="margin-top: 16px; color: var(--c-text-muted);">
+            Not a stretch into consumer / design / community work. Halo wins on technical execution and Seeker-native depth, both of which Pratik is purpose-built for.
+          </p>
+        </div>
+      </div>
+      <div class="ai" style="margin-top: 32px; display: flex; gap: 24px; color: var(--c-text-muted); font-size: 14px;">
+        <span>X · @pratikkale26</span>
+        <span style="opacity:0.4;">·</span>
+        <span>TG · @pratikkale26</span>
+        <span style="opacity:0.4;">·</span>
+        <span>pratikkale7661@gmail.com</span>
+      </div>
+    </div>
+
+    <!-- 13. THE ASK -->
+    <div class="slide bg-alt" id="s13">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">13 / 14</span>
+      <span class="caption ai">THE ASK</span>
+      <h1 class="hero ai" style="margin-top: 16px;">$15,000</h1>
+      <p class="body ai" style="margin-top: 12px; max-width: 800px;">
+        Solana Mobile Builder Grant · public-good infrastructure · open-source, no token, no equity.
+      </p>
+      <div class="divider ai"></div>
+      <table class="cmp ai" style="margin-top: 24px;">
+        <thead>
+          <tr>
+            <th>LINE ITEM</th>
+            <th>AMOUNT</th>
+            <th>WHY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Solana program audit (Halborn / OtterSec / Sec3)</td>
+            <td>$5,000</td>
+            <td>Non-negotiable · no wallet integrates an unaudited verifier</td>
+          </tr>
+          <tr>
+            <td>Pratik · 2 months adoption support</td>
+            <td>$6,500</td>
+            <td>Wallet-team partnership outreach + integration support</td>
+          </tr>
+          <tr>
+            <td>RPC + infra (12 months)</td>
+            <td>$1,500</td>
+            <td>Helius Pro for production tx-simulation queries</td>
+          </tr>
+          <tr>
+            <td>Domain + light branding</td>
+            <td>$700</td>
+            <td>halo.dev / halo.so · Vercel hosting · logomark</td>
+          </tr>
+          <tr>
+            <td>Seeker device</td>
+            <td>$500</td>
+            <td>End-to-end testing on real hardware</td>
+          </tr>
+          <tr>
+            <td>Demo video minimal polish + travel</td>
+            <td>$800</td>
+            <td>Launch video edit + Breakpoint India presence</td>
+          </tr>
+          <tr class="row-em">
+            <td><strong>TOTAL</strong></td>
+            <td><strong>$15,000</strong></td>
+            <td><strong>Sized to the work that remains, not the work that's done</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 14. CLOSE -->
+    <div class="slide" id="s14" style="justify-content: center; align-items: center; text-align: center;">
+      <span class="corner-brand">HALO</span>
+      <span class="corner-page">14 / 14</span>
+      <span class="caption ai">THE INVITATION</span>
+      <h1 class="hero ai" style="margin-top: 16px; max-width: 1100px;">
+        Make hardware-attested signing <span class="text-em">a primitive every Solana app can call</span> in five lines.
+      </h1>
+      <div class="ai" style="margin-top: 56px; display: flex; gap: 24px; flex-direction: column; align-items: center;">
+        <a href="https://github.com/Pratikkale26/halo" style="font-family: var(--font-mono); color: var(--c-primary); font-size: 22px; text-decoration: none;">github.com/Pratikkale26/halo</a>
+        <p class="small" style="color: var(--c-text-muted); max-width: 600px;">
+          Apache-2.0 · 23/23 tests passing · Ready to deploy
+        </p>
+      </div>
+      <div class="ai" style="margin-top: 64px; display: flex; gap: 16px;">
+        <span class="badge badge-primary">SOLANA MOBILE BUILDER GRANT</span>
+        <span class="badge badge-accent">$15K · ROLLING</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <button onclick="prev()">‹</button>
+    <span class="counter"><span id="cur">1</span> / 14</span>
+    <button onclick="next()">›</button>
+  </div>
+
+  <script>
+    let i = 1;
+    const total = 14;
+    function show(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById('s' + n);
+      if (el) { el.classList.add('active'); i = n; document.getElementById('cur').textContent = n; }
+    }
+    function next() { if (i < total) show(i + 1); }
+    function prev() { if (i > 1) show(i - 1); }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      else if (e.key === 'Home') show(1);
+      else if (e.key === 'End') show(total);
+    });
+  </script>
+</body>
+</html>
