@@ -538,29 +538,30 @@ Halo occupies a real gap: **on-device + hardware-attested + dApp-agnostic SDK + 
 
 ---
 
-## 14. Solana Mobile Grant Application — Draft Answers
+## 14. Solana Mobile Grant Application — Copy-Paste Answers
 
 > Source: https://solanamobile.com/grants
+> Last updated: 2026-04-25 — program ID locked, GitHub repo live, anchor tests 10/10 passing.
 
-| Field | Draft answer |
+| Field | Copy-paste value |
 |---|---|
-| **Project Name** | Halo |
-| **Requested Amount** | **$20,000** (top of the $10,000–$20,000 tier; line-itemed in §15) |
-| **Website URL** | TBD (placeholder: halo.dev) |
-| **Country** | India |
-| **First Name** | Pratik |
-| **Last Name** | Kale |
-| **Email** | pratikkale7661@gmail.com |
-| **Category** | Infrastructure / Tooling |
-| **Twitter (X)** | @pratikkale26 |
-| **Telegram** | @pratikkale26 |
-| **Link To Pitch Deck** | TBD — use `create-pitch-deck` skill in Phase 2 |
-| **Link To Demo Video** | TBD — record 3-min demo at end of MVP week 4 |
-| **Solana On-Chain Accounts** | TBD — devnet program ID after week 1; mainnet after week 4 |
-| **Do you have an Android app already?** | No, but applicant has shipped React Native / Expo apps |
-| **Solana dApp Store Status** | Planning submission in the near future (post-MVP) |
-| **Funding status** | Will not raise funds (treat as public-good infra) — *or* "Self-funded / pre-seed exploration" if exploring follow-on |
-| **Relevant metrics** | Pre-launch. Project scoping complete; competitive moat verified against 5,400+ Colosseum hackathon projects (zero overlap on Seeker-native, on-device, hardware-attested SDK). |
+| **Project Name** | `Halo` |
+| **Requested Amount** | `$10,000 - $20,000` (select the highest available tier; budget breakdown in §15) |
+| **Website URL** | `https://github.com/Pratikkale26/halo` (use the repo as the website until a domain is bought) |
+| **Country** | `India` |
+| **First Name** | `Pratik` |
+| **Last Name** | `Kale` |
+| **Email** | `pratikkale7661@gmail.com` |
+| **Category** | `Infrastructure / Tooling` (or whichever closest match the form offers — Halo is wallet-security infra) |
+| **Twitter (X)** | `@pratikkale26` |
+| **Telegram** | `@pratikkale26` |
+| **Link To Pitch Deck** | ⏳ Generate via `/create-pitch-deck` skill — should embed the demo video, the 3-layer architecture diagram from `docs/ARCHITECTURE.md`, and the budget table from §15. |
+| **Link To Demo Video** | ⏳ Record 90-sec video off `docs/DEMO-SCRIPT.md`. Loom or YouTube unlisted both fine. |
+| **Solana On-Chain Accounts** | `HUd9rbV6jTCD6HUufKRdFNx4jc7qhxAusejXDkZZ1KF7` (Halo verifier program ID — keypair generated, devnet deploy via `scripts/deploy-devnet.sh` → mainnet post-audit) |
+| **Do you have an Android app already?** | `No — building one for this grant. Applicant has shipped React Native / Expo apps previously.` |
+| **Solana dApp Store Status** | `Planning submission in the near future` (the demo app ships to dApp Store; the SDK distributes via npm) |
+| **Funding status** | `Will not raise funds` (Halo is structured as public-good infrastructure — open-source SDK, on-chain verifier program, no token, no equity) |
+| **Relevant metrics** | `Pre-launch. Pre-grant traction: 13/13 detector unit tests passing, 10/10 Anchor program integration tests passing, full 18-section technical spec published, open-source repo live with 13 atomic commits, competitive landscape verified against 5,400+ Colosseum hackathon projects (zero overlap on the Seeker-native + on-device + hardware-attested SDK wedge).` |
 
 ### Pitch / project description (draft, ~250 words)
 
