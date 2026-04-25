@@ -1,0 +1,45 @@
+{
+  "name": "halo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Hardware-attested transaction defense for Solana — built on the Seeker's Seed Vault, anchored to SAS.",
+  "license": "Apache-2.0",
+  "author": "Pratik Kale <pratikkale7661@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pratikkale26/vaultguard.git"
+  },
+  "homepage": "https://github.com/Pratikkale26/vaultguard#readme",
+  "bugs": {
+    "url": "https://github.com/Pratikkale26/vaultguard/issues"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' build",
+    "test": "pnpm -r --filter './packages/*' test",
+    "lint": "pnpm -r --filter './packages/*' lint",
+    "clean": "pnpm -r exec rm -rf dist build .turbo target",
+    "anchor:build": "anchor build",
+    "anchor:test": "anchor test",
+    "demo": "pnpm --filter @halo/demo start"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@10.15.1",
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.12.7"
+  },
+  "keywords": [
+    "solana",
+    "solana-mobile",
+    "seeker",
+    "seed-vault",
+    "attestation",
+    "sas",
+    "anchor",
+    "wallet-security",
+    "drainer-defense"
+  ]
+}

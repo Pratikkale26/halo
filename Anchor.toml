@@ -1,0 +1,38 @@
+[toolchain]
+anchor_version = "0.30.1"
+solana_version = "2.0.18"
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+halo = "Ha1oProgram1111111111111111111111111111111"
+
+[programs.devnet]
+halo = "Ha1oProgram1111111111111111111111111111111"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[test]
+startup_wait = 5000
+shutdown_wait = 2000
+
+[test.validator]
+url = "https://api.devnet.solana.com"
+
+[[test.validator.clone]]
+# Solana Attestation Service program (devnet)
+address = "AtT1Sa1tProgram111111111111111111111111111"
+
+# NOTE: program ID and SAS clone address above are placeholders.
+# Run `anchor keys sync` after first build to populate the real program ID
+# from `target/deploy/halo-keypair.json`.
