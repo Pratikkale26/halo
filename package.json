@@ -7,11 +7,11 @@
   "author": "Pratik Kale <pratikkale7661@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pratikkale26/vaultguard.git"
+    "url": "https://github.com/Pratikkale26/halo.git"
   },
-  "homepage": "https://github.com/Pratikkale26/vaultguard#readme",
+  "homepage": "https://github.com/Pratikkale26/halo#readme",
   "bugs": {
-    "url": "https://github.com/Pratikkale26/vaultguard/issues"
+    "url": "https://github.com/Pratikkale26/halo/issues"
   },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' build",
@@ -29,7 +29,14 @@
   "packageManager": "pnpm@10.15.1",
   "devDependencies": {
     "typescript": "^5.4.5",
-    "@types/node": "^20.12.7"
+    "@types/node": "^20.12.7",
+    "@coral-xyz/anchor": "^0.32.1",
+    "@solana/web3.js": "^1.95.3",
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.6",
+    "chai": "^4.4.1",
+    "mocha": "^10.4.0",
+    "ts-mocha": "^10.0.0"
   },
   "keywords": [
     "solana",

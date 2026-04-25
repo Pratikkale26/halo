@@ -45,7 +45,7 @@ pub struct IssueAttestation<'info> {
     /// gated by the issuer authority signature, which only the Halo SDK
     /// running on a Seeker can produce.
     /// CHECK: Read-only address; no account data dereferenced.
-    pub user: AccountInfo<'info>,
+    pub user: UncheckedAccount<'info>,
 
     /// The Halo issuer authority — must match the registered authority.
     #[account(

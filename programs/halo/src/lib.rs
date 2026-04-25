@@ -31,7 +31,7 @@ use instructions::*;
 // Placeholder program ID — a valid 32-byte pubkey that compiles cleanly.
 // Run `anchor keys sync` after first build to replace with the real program
 // ID from `target/deploy/halo-keypair.json`.
-declare_id!("4jbQWLLdtLG7Nx2fwAdRFYh8zfWXKqmEd4u1Lc9QN91t");
+declare_id!("HUd9rbV6jTCD6HUufKRdFNx4jc7qhxAusejXDkZZ1KF7");
 
 #[program]
 pub mod halo {
