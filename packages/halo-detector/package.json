@@ -1,0 +1,49 @@
+{
+  "name": "@halo/detector",
+  "version": "0.0.1",
+  "description": "On-device drainer-pattern detector for Solana transactions. Pure TypeScript rule engine, runs inside the Halo SDK on the Seeker.",
+  "license": "Apache-2.0",
+  "author": "Pratik Kale <pratikkale7661@gmail.com>",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./rules": {
+      "types": "./dist/rules/index.d.ts",
+      "import": "./dist/rules/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.95.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [
+    "solana",
+    "wallet-security",
+    "drainer-defense",
+    "transaction-analysis",
+    "halo"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
