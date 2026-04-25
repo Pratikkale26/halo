@@ -92,7 +92,7 @@ Run the `/create-pitch-deck` skill in the project root. It'll pull from `HALO.md
 7. Competitive landscape (the table from HALO.md §8.1)
 8. Team — Pratik + your background
 9. Roadmap (use HALO.md §12)
-10. The ask: $20k from Solana Mobile Builder Grant
+10. The ask: $15k from Solana Mobile Builder Grant
 
 ### 8. Submit the grant (30 min)
 
