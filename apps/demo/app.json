@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Halo Demo",
+    "slug": "halo-demo",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "halo",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B0B14"
+    },
+    "android": {
+      "package": "dev.halo.demo",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B0B14"
+      },
+      "minSdkVersion": 31
+    },
+    "ios": {
+      "bundleIdentifier": "dev.halo.demo",
+      "supportsTablet": false
+    },
+    "extra": {
+      "comment": "minSdkVersion 31 because the Seed Vault SDK requires API 31+. icon assets are placeholders — replace before dApp Store submission."
+    }
+  }
+}
