@@ -18,7 +18,11 @@ import {
 
 export async function sha256Bytes(bytes: Uint8Array): Promise<Uint8Array> {
   if (typeof globalThis.crypto?.subtle?.digest === "function") {
-    const out = await globalThis.crypto.subtle.digest("SHA-256", bytes);
+    // Copy into a fresh ArrayBuffer-backed Uint8Array to satisfy lib.dom's
+    // BufferSource (which excludes SharedArrayBuffer).
+    const buf = new Uint8Array(bytes.length);
+    buf.set(bytes);
+    const out = await globalThis.crypto.subtle.digest("SHA-256", buf);
     return new Uint8Array(out);
   }
   const { createHash } = await import("crypto");

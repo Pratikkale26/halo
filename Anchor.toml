@@ -7,10 +7,10 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-halo = "Ha1oProgram1111111111111111111111111111111"
+halo = "4jbQWLLdtLG7Nx2fwAdRFYh8zfWXKqmEd4u1Lc9QN91t"
 
 [programs.devnet]
-halo = "Ha1oProgram1111111111111111111111111111111"
+halo = "4jbQWLLdtLG7Nx2fwAdRFYh8zfWXKqmEd4u1Lc9QN91t"
 
 [registry]
 url = "https://api.apr.dev"

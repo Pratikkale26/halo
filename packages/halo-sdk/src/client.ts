@@ -21,7 +21,7 @@ import {
   type Finding,
   type Report,
 } from "@halo/detector";
-import { Keypair, PublicKey } from "@solana/web3.js";
+import { Keypair } from "@solana/web3.js";
 
 import { deriveAttestationPda } from "./attestation.js";
 import { pickBackend, type WalletBackend } from "./mwa.js";
@@ -35,7 +35,7 @@ import type {
 export class HaloClient {
   private readonly analyzer: Analyzer;
   private readonly backend: WalletBackend;
-  private readonly mockSigner?: Keypair;
+  private readonly config: HaloClientConfig;
 
   constructor(
     config: HaloClientConfig,
@@ -55,13 +55,9 @@ export class HaloClient {
       enabledRules: config.enabledRules,
     };
     this.analyzer = new Analyzer(analyzerConfig);
-
     this.config = config;
-    this.mockSigner = mockSigner;
     this.backend = pickBackend(config.walletMode ?? "mwa", config.mockApprover, mockSigner);
   }
-
-  private readonly config: HaloClientConfig;
 
   async signWithAttestation(
     input: SignWithAttestationInput,
