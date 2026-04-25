@@ -1,0 +1,23 @@
+[package]
+name = "halo"
+version = "0.1.0"
+description = "Hardware-attested transaction defense for Solana — verifier program"
+edition = "2021"
+license = "Apache-2.0"
+authors = ["Pratik Kale <pratikkale7661@gmail.com>"]
+repository = "https://github.com/Pratikkale26/vaultguard"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "halo"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+anchor-lang = "0.30.1"
