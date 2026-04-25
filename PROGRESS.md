@@ -27,18 +27,34 @@
 ## Commit history (autonomous build session)
 
 ```
+4faa3be fix:   build-validation fixes — placeholder program ID, TS strictness
+d2c00f7 docs:  update PROGRESS.md to reflect autonomous build session
 c91b6e3 chore: add deployment scripts, demo policy, and NEXT-STEPS handoff
-3119e84 docs: add architecture, integration, demo-script, and GTM playbook
-ac4f35e feat(demo): add Expo / React Native demo app
-36f5d16 feat(sdk): add @halo/sdk client wrapping detector + MWA + SAS
+3119e84 docs:  add architecture, integration, demo-script, and GTM playbook
+ac4f35e feat(demo):     add Expo / React Native demo app
+36f5d16 feat(sdk):      add @halo/sdk client wrapping detector + MWA + SAS
 5b26afc test(detector): add vitest unit tests for all 5 drainer rules
 4b99724 feat(detector): add @halo/detector with 5 drainer rules
-4c0f8bc test(program): add Anchor integration tests
-15ba89d feat(program): add halo Anchor program
+4c0f8bc test(program):  add Anchor integration tests
+15ba89d feat(program):  add halo Anchor program
 b0355f9 chore: initial monorepo scaffold
 ```
 
-9 atomic commits. None of them include `Co-Authored-By: Claude` (per the repeated user preference).
+11 atomic commits. None of them include `Co-Authored-By: Claude` (per the repeated user preference).
+
+## Build validation (run before stepping away)
+
+| Check | Result |
+|---|---|
+| `cargo check programs/halo` | ✅ clean (17 cfg warnings, benign Anchor-0.30 / Rust-1.89 noise) |
+| `pnpm install` | ✅ 57s, only acceptable peer-dep warnings |
+| `pnpm --filter @halo/detector test` | ✅ 13/13 pass |
+| `pnpm --filter @halo/detector build` | ✅ |
+| `pnpm --filter @halo/sdk lint` | ✅ |
+| `pnpm --filter @halo/sdk build` | ✅ |
+| `pnpm --filter @halo/demo lint` | ✅ |
+| `anchor build` | ⏸️ not run (requires solana BPF toolchain via `anchor build`, which Pratik will do alongside `anchor keys sync`) |
+| `anchor test` | ⏸️ not run (requires `anchor build` first) |
 
 ## What shipped
 
