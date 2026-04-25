@@ -4,7 +4,7 @@
 
 A drop-in mobile SDK + on-chain program that lets any Solana dApp (wallet, DEX, NFT marketplace, lending protocol) require a Seeker hardware-attested confirmation for high-value or risky transactions. On-device transaction simulation, drainer-pattern detection, and policy enforcement run inside the Seeker's secure execution environment — and emit verifiable SAS attestations that on-chain programs can check.
 
-**Status:** Project scoping complete. Name locked: **Halo** (2026-04-25). Grant ask: **$15k** Solana Mobile Builder Grant *(revised down from $20k on 2026-04-25 after MVP codebase shipped — see §15)*.
+**Status:** Project scoping complete. Name locked: **Halo** (2026-04-25). Grant ask: **$12k** Solana Mobile Builder Grant *(revised down from $20k on 2026-04-25 after MVP codebase shipped — see §15)*.
 **Author:** Pratik Kale ([@pratikkale26](https://x.com/pratikkale26) — same handle on Telegram)
 **Repo:** `https://github.com/Pratikkale26/vaultguard` *(slug pending rename to `halo`)*
 **Workspace:** `/home/pk/projects/vaultguard` *(local dir name retained from initial commit; GitHub repo may be renamed to `halo` later)*
@@ -28,7 +28,7 @@ A drop-in mobile SDK + on-chain program that lets any Solana dApp (wallet, DEX, 
 12. [Roadmap (post-MVP)](#12-roadmap-post-mvp)
 13. [Go-to-Market](#13-go-to-market)
 14. [Solana Mobile Grant Application — Draft Answers](#14-solana-mobile-grant-application--draft-answers)
-15. [Budget Plan ($15k)](#15-budget-plan-15k)
+15. [Budget Plan ($12k)](#15-budget-plan-12k)
 16. [Risks & Mitigations](#16-risks--mitigations)
 17. [Open Decisions](#17-open-decisions)
 18. [References](#18-references)
@@ -45,7 +45,7 @@ A drop-in mobile SDK + on-chain program that lets any Solana dApp (wallet, DEX, 
 | **Crypto necessity** | STRONG — drainer phishing is uniquely a crypto problem; only hardware-attested signing inside a secure execution environment defeats it without trusting the host app or browser |
 | **Founder edge** | 3yr full-stack blockchain (Pratik), Turbin3 grad, CTO at IIT Madras startup, infra/DePIN/tooling background, prior React Native + Expo shipping experience |
 | **MVP estimate** | 4 weeks (1 person), Kotlin Android SDK + React Native bridge + Anchor program + SAS issuer + reference dApp |
-| **Grant ask** | **$15k** from Solana Mobile Builder Grants (revised down 2026-04-25 — MVP shipped, scope reflects what remains: audit + adoption support) |
+| **Grant ask** | **$12k** from Solana Mobile Builder Grants (revised down 2026-04-25 — MVP shipped, scope reflects what remains: audit + adoption support) |
 
 ---
 
@@ -546,7 +546,7 @@ Halo occupies a real gap: **on-device + hardware-attested + dApp-agnostic SDK + 
 | Field | Copy-paste value |
 |---|---|
 | **Project Name** | `Halo` |
-| **Requested Amount** | `$10,000 - $20,000` (specifically asking $15,000 — line-itemed in §15) |
+| **Requested Amount** | `$10,000 - $20,000` (specifically asking $12,000 — line-itemed in §15) |
 | **Website URL** | `https://github.com/Pratikkale26/halo` (use the repo as the website until a domain is bought) |
 | **Country** | `India` |
 | **First Name** | `Pratik` |
@@ -577,23 +577,21 @@ Halo occupies a real gap: **on-device + hardware-attested + dApp-agnostic SDK + 
 
 ---
 
-## 15. Budget Plan ($15k)
+## 15. Budget Plan ($12k)
 
-> Revised down from $20k on 2026-04-25 after the MVP codebase shipped (10/10 program tests + 13/13 detector tests passing). The scope cuts reflect that the build phase is done — what's left to fund is audit, hardware, and ~2 months of adoption work.
+> Revised down from $20k → $12k → **$12k** on 2026-04-25 as the MVP codebase shipped (10/10 program tests + 13/13 detector tests passing). Final scope: audit + Seeker device + 6 weeks of adoption-support compensation. Everything else is genuinely DIY-able.
 
 | Line item | Allocation | Notes |
 |---|---|---|
-| Solana program audit | $5,000 | Halborn / OtterSec / Sec3 focused-scope audit of verifier program (covers SAS verification + policy registry + issuer authority). Non-negotiable — no wallet team integrates an unaudited verifier. |
-| Compensation for solo dev (Pratik) | $6,500 | 2 months post-grant adoption support (Phantom/Backpack/Solflare partnership outreach + first integration support). Reduced from $9.5k since the 4-week MVP build is already complete. |
-| RPC + infra (12 months) | $1,500 | Helius Pro tier for tx simulation queries during demo + early adoption. |
-| Domain + light branding | $700 | Domain (halo.dev / halo.so), Vercel hosting, basic logomark + favicon (Pratik DIY for the brand pass). |
+| Solana program audit | $5,000 | Halborn / OtterSec / Sec3 focused-scope audit of verifier program (covers SAS verification + policy registry + issuer authority). **Non-negotiable** — no wallet integrates an unaudited verifier program. |
+| Compensation for solo dev (Pratik) | $5,000 | ~6 weeks of post-grant adoption support: Phantom / Backpack / Solflare partnership outreach + first integration support + responding to issues from open-source users. |
 | Seeker device | $500 | Buy one for end-to-end testing on real hardware (replace the mock MWA backend with the production wiring). |
-| Demo video minimal polish | $300 | Light motion graphics + intro/outro card for the launch video (raw recording is done by Pratik solo). |
-| Conference / dev relations | $500 | Travel + lightweight presence at Breakpoint India / Solana India event. |
+| RPC + infra (12 months) | $1,000 | Helius free tier extended where possible; upgrade to Pro only when production tx-simulation traffic warrants. |
+| Domain + minimal branding + demo polish | $500 | Domain (halo.dev / halo.so), Vercel hosting, basic logomark, light motion graphics for launch video. Pratik DIY. |
 
-**Total: $15,000.**
+**Total: $12,000.**
 
-If only $10k granted: drop conference, halve compensation line, defer audit (limit to internal review). If full $15k: plan as above.
+If only $10k granted: cut RPC to $500, defer Seeker (use emulator), accept lower-tier audit. If full $12k: plan as above. The audit + 6 weeks of adoption work are the load-bearing items — everything else flexes.
 
 ---
 

@@ -17,7 +17,7 @@
 |---|---|
 | Project name | **Halo** |
 | Grant program | Solana Mobile Builder Grant (rolling, no deadline, confirmed open) |
-| Grant ask | **$15k** (revised down from $20k on 2026-04-25 after MVP shipped; line-itemed in HALO.md §15) |
+| Grant ask | **$12k** (revised down from $20k on 2026-04-25 after MVP shipped; line-itemed in HALO.md §15) |
 | License | **Apache-2.0** (locked in autonomous build; LICENSE file + all package.json) |
 | Squads multisig | Defer to Squads-DAO model (option C). Solo dev keypair through MVP. |
 | DevRel | No paid contractor. Turbin3 alumni + Superteam India warm intros. |

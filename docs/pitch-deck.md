@@ -2,7 +2,7 @@
 
 > Slide-by-slide source for paste-into-Pitch / Google Slides / Figma.
 > Visual version: `docs/pitch-deck.html` (open in browser, arrow-key navigation).
-> Audience: **Solana Mobile Builder Grant reviewers**. Target ask: **$15,000**.
+> Audience: **Solana Mobile Builder Grant reviewers**. Target ask: **$12,000**.
 > Author: Pratik Kale ([@pratikkale26](https://x.com/pratikkale26)).
 
 Each `---` is a slide break.
@@ -15,7 +15,7 @@ Each `---` is a slide break.
 
 *Hardware-attested transaction defense for Solana — built on the Seeker's Seed Vault.*
 
-`Solana Mobile Builder Grant · $15,000`
+`Solana Mobile Builder Grant · $12,000`
 
 `Pratik Kale · github.com/Pratikkale26/halo · April 2026`
 
@@ -227,19 +227,18 @@ DePIN / infrastructure / tooling is Pratik's strongest lane. Halo is exactly tha
 
 ## Slide 13 — The Ask
 
-# **$15,000**
+# **$12,000**
 
 Solana Mobile Builder Grant · public-good infrastructure · open-source, no token, no equity.
 
 | Line item | Amount | Why |
 |---|---|---|
 | Solana program audit (Halborn / OtterSec / Sec3) | **$5,000** | Non-negotiable · no wallet integrates an unaudited verifier |
-| Pratik · 2 months adoption support | **$6,500** | Wallet-team partnership outreach + integration support |
-| RPC + infra (12 months) | **$1,500** | Helius Pro for production tx-simulation queries |
-| Domain + light branding | **$700** | halo.dev / halo.so · Vercel hosting · logomark |
+| Pratik · 6 weeks adoption support | **$5,000** | Wallet-team partnership outreach + first integration support |
 | Seeker device | **$500** | End-to-end testing on real hardware |
-| Demo video minimal polish + travel | **$800** | Launch video edit + Breakpoint India presence |
-| **Total** | **$15,000** | **Sized to the work that remains, not the work that's done** |
+| RPC + infra (12 months) | **$1,000** | Helius free tier extended; upgrade only when production traffic needs |
+| Domain + minimal branding + demo polish | **$500** | halo.dev · Vercel · logomark · launch-video motion |
+| **Total** | **$12,000** | **Sized to the work that remains, not the work that's done** |
 
 **Speaker note:** Reviewers respond to budget honesty. The "sized to what remains" line preempts the "is this padded?" question.
 
@@ -253,7 +252,7 @@ Solana Mobile Builder Grant · public-good infrastructure · open-source, no tok
 
 Apache-2.0 · 23/23 tests passing · ready to deploy
 
-`Solana Mobile Builder Grant · $15k · rolling`
+`Solana Mobile Builder Grant · $12k · rolling`
 
 **Speaker note:** Close on the invitation framing — reviewers are part of the launch, not just gatekeepers. The repo link is the call to action.
 
