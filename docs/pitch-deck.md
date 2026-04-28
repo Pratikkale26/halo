@@ -39,17 +39,17 @@ Three forces compound it:
 
 ---
 
-## Slide 3 — Recent Incident · 3 Weeks Ago
+## Slide 3 — Recent Incident · April 1, 2026
 
-**Drift Protocol: $285M lost on April 1, 2026.**
+**Drift Protocol: $285M drained in 12 minutes.**
 
-Compromised admin keys (DPRK-linked). Protocol permanently frozen. TVL collapsed from $550M to under $10M overnight.
+Second-largest exploit in Solana history. A 6-month social-engineering campaign attributed to DPRK-linked UNC4736 — the same actor behind the 2024 Radiant Capital hack.
 
-**What would have stopped it:** Hardware-attested admin signatures — a multisig where every admin signature requires biometric confirmation inside a tamper-resistant secure execution environment. Off-chain key compromise becomes insufficient.
+**How it happened — durable nonces, weaponised.** Drift's Security Council members were socially engineered into pre-signing transactions via Solana's durable-nonce feature. They thought they were signing routine ops. They were actually handing over admin control. Once admins, attackers whitelisted a worthless CVT token as collateral, deposited 500M CVT, and withdrew $285M in USDC, SOL, and ETH.
 
-**The broader pattern:** Whether it's an admin key or a user's wallet, Solana's signature verification trusts the input bytes. We have no on-chain way to verify a human reviewed them.
+**What Halo detects — durable-nonce abuse rule, already shipped.** Halo's on-device detector flags this exact pattern: a transaction using a durable nonce that also grants administrative authority. The Seeker's secure display shows the real instruction effects — not the description supplied by the calling app. The signer sees what they're actually signing, before Seed Vault is asked to confirm.
 
-**Speaker note:** This is the freshest data point reviewers have. Drift was a top-3 Solana protocol three weeks ago. Use the past tense deliberately — emphasise the irreversibility.
+**Speaker note:** This is the freshest data point reviewers have, and it maps directly to a Halo detector rule that already ships. Don't say "would have stopped it" hypothetically — say "Halo's `durable-nonce-abuse` rule flags exactly this pattern." Land the WYSIWYG signing property: *the signer sees what they're actually signing.*
 
 ---
 
@@ -59,7 +59,7 @@ Compromised admin keys (DPRK-linked). Protocol permanently frozen. TVL collapsed
 
 | Market shift | Tech unlock | Platform |
 |---|---|---|
-| Drainer kits evolved past server-side simulation. Blockaid-class defenses were enough in 2024 — they aren't anymore. | Solana Attestation Service (SAS) launched on mainnet. The composable on-chain credential rail Halo needs. | Solana Seeker is shipping with 175+ dApps live on the dApp Store. |
+| Drainer kits evolved past server-side simulation. Blockaid-class defenses were enough in 2024 — they aren't anymore. | Solana Attestation Service (SAS) launched on mainnet (May 2025). The composable on-chain credential rail Halo needs. | Solana Seeker is shipping with 160+ dApps live on the dApp Store. |
 
 **Speaker note:** "Why now" is Sequoia's most overlooked slide. Three concrete catalysts, all dated within 6 months — not a generic "crypto is growing" wave.
 
@@ -169,7 +169,7 @@ Sources: Colosseum Copilot search across 6 query angles · GitHub `solana-mobile
 
 **Pre-grant: the codebase ships today.**
 
-| 14 | 23/23 | 3,461 | 5 |
+| 18 | 23/23 | 3,400+ | 5 |
 |---|---|---|---|
 | Atomic commits | Tests passing | Lines of source | Drainer rules shipped |
 

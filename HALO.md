@@ -55,7 +55,7 @@ A drop-in mobile SDK + on-chain program that lets any Solana dApp (wallet, DEX, 
 
 - **$90M+ lost to Solana wallet drainers in H1 2025 alone** — phishing kits weaponize legitimate Solana primitives (Blinks, durable nonces, the `assign` instruction) against users.
 - **2026 drainer kits actively bypass wallet simulations.** TOCTOU (time-of-check / time-of-use) attacks let drainers show one transaction during simulation and execute another at sign time.
-- **April 1, 2026 — Drift Protocol exploited for $285M** via compromised admin keys (DPRK-linked). The protocol is permanently frozen. TVL collapsed from $550M to <$10M.
+- **April 1, 2026 — Drift Protocol exploited for $285M** in 12 minutes — the second-largest exploit in Solana history. A 6-month social-engineering campaign (DPRK-linked UNC4736, same actor as the 2024 Radiant Capital hack) tricked Drift's Security Council members into pre-signing transactions via Solana's durable-nonce feature, handing over admin control. Attackers then whitelisted a worthless CVT token as collateral and drained $285M in USDC, SOL, and ETH.
 
 ### 2.2 What's broken in the current defense stack
 
@@ -453,7 +453,7 @@ Halo occupies a real gap: **on-device + hardware-attested + dApp-agnostic SDK + 
 | 1 | **Phantom / Backpack mobile** | Step-up hardware confirmation for any tx > $X, blocking 90%+ of drainer flows that worked on browser. |
 | 2 | **Kamino / Marginfi lending** | Block deposits above a threshold unless attestation shows tx was reviewed in Seed Vault. |
 | 3 | **NFT marketplaces (Magic Eden mobile)** | Detect bait-and-switch listings (tx says "buy NFT for 1 SOL", actually approves all NFTs to attacker). |
-| 4 | **DeFi protocols (admin keys)** | Squads-style multisig where each signer must produce a Halo attestation — would have prevented the Drift $285M hack. |
+| 4 | **DeFi protocols (admin / governance multisig)** | Squads-style multisig where each signer must produce a Halo attestation — Halo's durable-nonce-abuse rule + WYSIWYG secure display defends against the social-engineering pattern that drained Drift for $285M. |
 | 5 | **Web DeFi → Seeker 2FA** | Web app generates deeplink → Seeker confirms with attestation → web verifies. Universal hardware-MFA for web Solana. |
 | 6 | **Insurance pools / risk markets** | Pool premiums priced by Halo adoption; users with hardware-attested policies get cheaper coverage. |
 | 7 | **Agent wallets (e.g., SeekerOS)** | AI agent can transact freely up to limit; spending above limit triggers human attestation. |
@@ -567,7 +567,7 @@ Halo occupies a real gap: **on-device + hardware-attested + dApp-agnostic SDK + 
 
 > **Halo is a hardware-attested transaction defense SDK for Solana, built on the Seeker's Seed Vault and anchored to the Solana Attestation Service (SAS).**
 >
-> Solana users lost over $90M to wallet drainers in H1 2025 alone, and on April 1, 2026, Drift Protocol was exploited for $285M via compromised admin keys. Existing defenses are either server-side simulations that drainers now bypass via TOCTOU attacks, or browser extensions that don't reach mobile users. There is no mobile-native, on-device, hardware-attested defense layer — and the Seeker is the only mobile platform globally where the signing key, biometric sensor, and secure display all live inside the same tamper-resistant boundary.
+> Solana users lost over $90M to wallet drainers in H1 2025 alone, and on April 1, 2026, Drift Protocol was drained of $285M in 12 minutes after a 6-month social-engineering campaign exploited Solana's durable-nonce feature to trick Security Council members into pre-signing transactions that handed over admin control. Existing defenses are either server-side simulations that drainers now bypass via TOCTOU attacks, or browser extensions that don't reach mobile users. There is no mobile-native, on-device, hardware-attested defense layer — and the Seeker is the only mobile platform globally where the signing key, biometric sensor, and secure display all live inside the same tamper-resistant boundary.
 >
 > Halo is a drop-in SDK (Kotlin + React Native) that lets any Solana dApp wrap high-value or risky transactions in a Seed Vault hardware confirmation. On-device transaction simulation and a drainer-pattern rule engine run inside the secure execution environment, then emit a SAS attestation that on-chain Solana programs can verify via CPI. This makes hardware-attested signing a composable, verifiable on-chain primitive that any wallet, DeFi protocol, or NFT marketplace can require for sensitive flows.
 >

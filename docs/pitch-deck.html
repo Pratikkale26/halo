@@ -233,24 +233,26 @@
     <div class="slide bg-alt" id="s3">
       <span class="corner-brand">HALO</span>
       <span class="corner-page">03 / 14</span>
-      <span class="caption ai" style="color: var(--c-danger);">RECENT INCIDENT · 3 WEEKS AGO</span>
-      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1000px;">
-        Drift Protocol: <span class="text-danger">$285M lost on April 1, 2026.</span>
+      <span class="caption ai" style="color: var(--c-danger);">RECENT INCIDENT · APRIL 1, 2026</span>
+      <h1 class="h1 ai" style="margin-top: 16px; max-width: 1100px;">
+        Drift Protocol: <span class="text-danger">$285M drained in 12 minutes.</span>
       </h1>
-      <p class="body ai" style="margin-top: 16px; max-width: 900px;">
-        Compromised admin keys (DPRK-linked). Protocol permanently frozen. TVL collapsed from $550M to under $10M overnight.
+      <p class="body ai" style="margin-top: 16px; max-width: 1000px;">
+        Second-largest exploit in Solana history. A 6-month social-engineering campaign attributed to DPRK-linked UNC4736 — the same actor behind the 2024 Radiant Capital hack.
       </p>
       <div class="divider ai"></div>
-      <div class="grid-2 ai" style="margin-top: 24px; max-width: 1100px;">
-        <div class="card card-glow">
-          <p class="caption" style="color: var(--c-primary);">WHAT WOULD HAVE STOPPED IT</p>
-          <p class="h3" style="margin-top: 12px;">Hardware-attested admin signatures</p>
-          <p class="small" style="margin-top: 12px;">A multisig where every admin signature requires biometric confirmation inside a tamper-resistant secure execution environment makes off-chain key compromise insufficient.</p>
-        </div>
+      <div class="grid-2 ai" style="margin-top: 24px; max-width: 1150px;">
         <div class="card">
-          <p class="caption">THE BROADER PATTERN</p>
-          <p class="h3" style="margin-top: 12px;">Same root cause as drainers</p>
-          <p class="small" style="margin-top: 12px;">Whether it's an admin key or a user's wallet — Solana's signature verification trusts the input bytes. We have no on-chain way to verify a human reviewed them.</p>
+          <p class="caption" style="color: var(--c-danger);">HOW IT HAPPENED</p>
+          <p class="h3" style="margin-top: 12px;">Durable nonces · weaponised</p>
+          <p class="small" style="margin-top: 12px;">Drift's Security Council members were socially engineered into pre-signing transactions via Solana's durable-nonce feature. They thought they were signing routine ops. They were actually handing over admin control.</p>
+          <p class="small" style="margin-top: 10px; color: var(--c-text-muted);">Once admins, attackers whitelisted a worthless CVT token as collateral, deposited 500M CVT, and withdrew $285M in USDC, SOL, and ETH.</p>
+        </div>
+        <div class="card card-glow">
+          <p class="caption" style="color: var(--c-primary);">WHAT HALO DETECTS</p>
+          <p class="h3" style="margin-top: 12px;">Durable-nonce abuse rule · already shipped</p>
+          <p class="small" style="margin-top: 12px;">Halo's on-device detector flags this exact pattern: a transaction using a durable nonce that also grants administrative authority. The Seeker's secure display shows the real instruction effects — not the description supplied by the calling app.</p>
+          <p class="small" style="margin-top: 10px; color: var(--c-text-muted);">The signer sees what they're actually signing, before Seed Vault is asked to confirm.</p>
         </div>
       </div>
     </div>
@@ -277,7 +279,7 @@
         </div>
         <div class="card">
           <p class="caption" style="color: var(--c-primary);">PLATFORM</p>
-          <p class="h3" style="margin-top: 12px;">Solana Seeker is shipping with 175+ dApps live.</p>
+          <p class="h3" style="margin-top: 12px;">Solana Seeker shipping with 160+ dApps live.</p>
           <p class="small" style="margin-top: 10px;">The first mobile platform globally where signing key, biometric, and secure display share a single hardware boundary.</p>
         </div>
       </div>
@@ -440,8 +442,9 @@ halo::cpi::verify_attestation(
           <p class="metric-label">SEEKER-NATIVE COMPETITORS</p>
         </div>
       </div>
+      <!-- Production note: replace {{DEMO_VIDEO_URL}} above with the recorded Loom / YouTube link before submitting -->
       <p class="small ai" style="margin-top: 32px; color: var(--c-text-muted);">
-        Replace <code class="mono" style="color:var(--c-primary)">{{DEMO_VIDEO_URL}}</code> with the recorded Loom / YouTube link before submitting.
+        Apache-2.0 · Reference Expo demo runs against devnet today.
       </p>
     </div>
 
@@ -510,7 +513,7 @@ halo::cpi::verify_attestation(
       <div class="divider-strong ai"></div>
       <div class="grid-4 ai" style="margin-top: 32px;">
         <div class="metric">
-          <p class="metric-value accent">14</p>
+          <p class="metric-value accent">18</p>
           <p class="metric-label">ATOMIC COMMITS</p>
         </div>
         <div class="metric">
@@ -518,7 +521,7 @@ halo::cpi::verify_attestation(
           <p class="metric-label">TESTS PASSING</p>
         </div>
         <div class="metric">
-          <p class="metric-value accent">3,461</p>
+          <p class="metric-value accent">3,400+</p>
           <p class="metric-label">LINES OF SOURCE</p>
         </div>
         <div class="metric">

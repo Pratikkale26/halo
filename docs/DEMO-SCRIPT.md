@@ -20,7 +20,7 @@
 
 **VO (read in a steady, factual tone):**
 
-> "Solana users lost over ninety million dollars to wallet drainers in the first half of 2025 alone. On April first, twenty twenty-six, Drift Protocol was exploited for two hundred and eighty-five million dollars when an admin key was compromised. The drainers are evolving — the latest kits bypass server-side wallet simulations. Existing defenses aren't enough."
+> "Solana users lost over ninety million dollars to wallet drainers in the first half of 2025 alone. On April first, twenty twenty-six, Drift Protocol was drained of two hundred and eighty-five million dollars in twelve minutes — the second-largest exploit in Solana history. Attackers used Solana's durable-nonce feature to trick admin signers into pre-signing transactions they didn't understand. The drainers are evolving — and the same patterns are now being weaponised against governance multisigs. Existing defenses aren't enough."
 
 ---
 
@@ -55,9 +55,9 @@
 ## Lower-third citations (overlay text)
 
 - 0:08 — "$90M+ lost · H1 2025 · Solana phishing report"
-- 0:13 — "Drift Protocol · April 1 2026 · admin-key compromise"
+- 0:13 — "Drift Protocol · April 1 2026 · $285M · durable-nonce social engineering"
 - 0:30 — "Drainer technique: dev.to/ohmygod/anatomy-of-a-solana-wallet-drainer"
-- 1:15 — "github.com/Pratikkale26/vaultguard · Apache 2.0"
+- 1:15 — "github.com/Pratikkale26/halo · Apache 2.0"
 
 ---
 
